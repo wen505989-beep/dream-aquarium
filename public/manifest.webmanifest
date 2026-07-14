@@ -2,9 +2,9 @@
   "name": "梦光水族箱",
   "short_name": "梦光鱼缸",
   "description": "原创离线电子宠物水族箱",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#17143b",
   "theme_color": "#17143b",
-  "icons": [{ "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+  "icons": [{ "src": "icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
 }

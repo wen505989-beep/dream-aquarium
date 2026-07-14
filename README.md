@@ -30,3 +30,11 @@ npm run preview
 4. 本项目不需要环境变量。点击 Deploy；部署完成后，Vercel 会提供一个可公开访问的 HTTPS 链接，可从项目的 Domains 页面复制和分享。
 
 `vercel.json` 仅包含单页应用刷新回退规则：访问任意前端地址时会返回入口页面，避免刷新时出现 404。静态资源由 Vite 打包为项目内的带哈希文件名，并随构建一同上传。
+
+## GitHub Pages 备用部署
+
+仓库已经包含 GitHub Pages 工作流。推送到 `main` 分支后，GitHub Actions 会自动构建并发布网站到：
+
+`https://wen505989-beep.github.io/dream-aquarium/`
+
+首次发布前，需要在仓库的 **Settings → Pages** 中将发布来源设为 **GitHub Actions**。不需要环境变量或额外服务器。
