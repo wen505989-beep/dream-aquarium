@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <title>正在更新梦光水族箱</title>
+    <style>
+      body{display:grid;min-height:100vh;place-items:center;margin:0;background:linear-gradient(160deg,#f7f6ff,#e1edff);color:#394a87;font:16px ui-rounded,"Microsoft YaHei",system-ui,sans-serif}.card{display:grid;justify-items:center;gap:12px;text-align:center}.spinner{width:38px;height:38px;border:4px solid #c9d8f7;border-top-color:#679bdc;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}small{color:#7885ae}
+    </style>
+  </head>
+  <body>
+    <div class="card"><span class="spinner"></span><b>正在更新梦光水族箱…</b><small>首次更新需要清理旧缓存</small></div>
+    <script>
+      (async()=>{
+        const scope='/dream-aquarium/';
+        const registrations=await navigator.serviceWorker?.getRegistrations?.()||[];
+        await Promise.all(registrations.filter(registration=>new URL(registration.scope).pathname.includes(scope)).map(registration=>registration.unregister()));
+        const keys=await caches.keys();
+        await Promise.all(keys.filter(key=>key.startsWith('dream-aquarium-')).map(key=>caches.delete(key)));
+        location.replace(`${scope}?updated=${Date.now()}`);
+      })().catch(()=>location.replace('/dream-aquarium/?updated=retry'));
+    </script>
+  </body>
+</html>
