@@ -27,8 +27,17 @@ export function getFishAsset(type,state='idle'){
   return cache.get(key);
 }
 
-export function preloadFishAssets(){
-  Object.keys(speciesIds).forEach(type=>getFishAsset(type,'idle'));
+function waitForImage(image){
+  if(image.complete)return image.naturalWidth?Promise.resolve():Promise.reject(new Error('Fish image failed to load'));
+  return new Promise((resolve,reject)=>{
+    image.addEventListener('load',resolve,{once:true});
+    image.addEventListener('error',()=>reject(new Error('Fish image failed to load')),{once:true});
+  });
+}
+
+export function preloadFishAssets(types=Object.keys(speciesIds)){
+  const uniqueTypes=[...new Set(types.filter(type=>speciesIds[type]))];
+  return Promise.all(uniqueTypes.flatMap(type=>['idle','eating'].map(state=>waitForImage(getFishAsset(type,state)))));
 }
 
 export const fishAssetInfo=Object.freeze({speciesIds,states:['idle','happy','surprised','sleeping','eating','avatar']});
