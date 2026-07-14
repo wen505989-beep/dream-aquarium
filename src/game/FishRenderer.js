@@ -7,7 +7,7 @@ function drawImageWhenReady(image,draw){
 
 export function drawFishCharacter(ctx,{x,y,size,type,direction=1,time=0,status='idle'}){
   const state=toAssetState(status),image=getFishAsset(type,state);
-  if(!image.complete||!image.naturalWidth)return;
+  if(!image.complete||!image.naturalWidth)return false;
   const phase=time*2.2+x*.012;
   const bob=Math.sin(phase)*size*.045;
   const happy=state==='happy',sleeping=state==='sleeping',surprised=state==='surprised',eating=state==='eating';
@@ -19,6 +19,7 @@ export function drawFishCharacter(ctx,{x,y,size,type,direction=1,time=0,status='
   ctx.translate(x,y+bob);ctx.rotate(tilt);ctx.scale(direction*pulse,pulse);
   ctx.drawImage(image,-display*.5,-display*.5,display,display);
   ctx.restore();
+  return true;
 }
 
 export function drawFishAvatar(canvas,type){

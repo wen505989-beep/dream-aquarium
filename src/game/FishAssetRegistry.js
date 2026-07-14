@@ -28,7 +28,7 @@ export function getFishAsset(type,state='idle'){
 }
 
 export function preloadFishAssets(){
-  Object.keys(speciesIds).forEach(type=>['idle','happy','surprised','sleeping','eating','avatar'].forEach(state=>getFishAsset(type,state)));
+  Object.keys(speciesIds).forEach(type=>getFishAsset(type,'idle'));
 }
 
 export const fishAssetInfo=Object.freeze({speciesIds,states:['idle','happy','surprised','sleeping','eating','avatar']});
