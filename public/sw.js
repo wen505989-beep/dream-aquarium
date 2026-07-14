@@ -1,4 +1,4 @@
-const CACHE = 'dream-aquarium-v10';
+const CACHE = 'dream-aquarium-v11';
 const BASE_URL = new URL('./', self.registration.scope).pathname;
 const ASSETS = ['', 'index.html', 'manifest.webmanifest', 'icon.svg'].map(asset => `${BASE_URL}${asset}`);
 self.addEventListener('install', event => event.waitUntil(caches.open(CACHE).then(cache => cache.addAll(ASSETS)).then(() => self.skipWaiting())));
