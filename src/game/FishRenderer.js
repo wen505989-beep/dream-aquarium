@@ -15,11 +15,16 @@ export function drawFishCharacter(ctx,{x,y,size,type,direction=1,time=0,status='
   const tilt=surprised?Math.sin(time*18+x*.04)*.035:Math.sin(phase)*.012;
   const display=size*3.18;
   ctx.save();
-  ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
-  ctx.translate(x,y+bob);ctx.rotate(tilt);ctx.scale(direction*pulse,pulse);
-  ctx.drawImage(image,-display*.5,-display*.5,display,display);
-  ctx.restore();
-  return true;
+  try{
+    ctx.imageSmoothingEnabled=true;ctx.imageSmoothingQuality='high';
+    ctx.translate(x,y+bob);ctx.rotate(tilt);ctx.scale(direction*pulse,pulse);
+    ctx.drawImage(image,-display*.5,-display*.5,display,display);
+    return true;
+  }catch{
+    return false;
+  }finally{
+    ctx.restore();
+  }
 }
 
 export function drawFishAvatar(canvas,type){

@@ -8,7 +8,8 @@ const speciesIds={
 
 const states=new Set(['idle','happy','surprised','sleeping','eating','avatar']);
 const cache=new Map();
-const fishAssets=import.meta.glob('../assets/fish/*/*.png',{eager:true,import:'default',query:'?url'});
+// WebP keeps the transparent sprites much smaller on first mobile visit.
+const fishAssets=import.meta.glob('../assets/fish/*/*.webp',{eager:true,import:'default',query:'?url'});
 
 export function toAssetState(state='idle'){
   return ({surprise:'surprised',sleep:'sleeping',eat:'eating'})[state]||state;
@@ -21,7 +22,7 @@ export function getFishAsset(type,state='idle'){
   if(!cache.has(key)){
     const image=new Image();
     image.decoding='async';
-    image.src=fishAssets[`../assets/fish/${species}/${frame}.png`];
+    image.src=fishAssets[`../assets/fish/${species}/${frame}.webp`];
     cache.set(key,image);
   }
   return cache.get(key);
