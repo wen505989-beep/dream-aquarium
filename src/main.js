@@ -12,7 +12,10 @@ let ui;
 
 async function start(){
   try{
-    await preloadFishAssets(state.fish.map(fish=>fish.type));
+    await Promise.all([
+      preloadFishAssets(state.fish.map(fish=>fish.type)),
+      new Promise(resolve=>window.setTimeout(resolve,900))
+    ]);
     const aquarium=new Aquarium(document.querySelector('#aquarium'),state,audio,text=>ui?.notice(text),()=>ui?.persist());
     ui=new UIManager(state,save,audio,aquarium);
     if(state.wasAway)ui.notice('小鱼有点想你，不过它们一直在等你回来。');
