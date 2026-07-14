@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#17143b" />
+    <meta name="description" content="原创的离线桌面虚拟水族箱" />
+    <link rel="manifest" href="%BASE_URL%manifest.webmanifest" />
+    <link rel="stylesheet" href="./src/styles/main.css" />
+    <title>梦光水族箱</title>
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div><h1 id="tank-name">梦光水族箱</h1></div>
+        <div class="top-actions"><time id="clock" aria-label="当前时间"></time><button class="icon-button" id="settings-button" aria-label="打开设置">⚙</button></div>
+      </header>
+      <section class="aquarium-card" aria-label="可互动的虚拟水族箱">
+        <div class="pet-hud" aria-label="鱼缸状态">
+          <span class="hud-chip hunger"><b>♥</b><i id="tank-hunger">--</i></span>
+          <span class="hud-chip mood"><b>☻</b><i id="tank-mood">--</i></span>
+          <span class="hud-chip bond"><b>✦</b><i id="tank-bond">--</i></span>
+        </div>
+        <canvas id="aquarium" aria-label="水族箱画面，点击小鱼可以互动"></canvas>
+        <div class="tank-glass" aria-hidden="true"></div>
+        <div class="hint" id="hint" role="status">轻点小鱼，或慢慢拖动来抚摸它们</div>
+      </section>
+      <nav class="controls" aria-label="水族箱操作">
+        <button id="feed-button"><span>✦</span>喂食</button>
+        <button id="pet-button"><span>♡</span>抚摸模式</button>
+        <button id="light-button"><span>☀</span>灯光</button>
+        <button id="decor-button"><span>✿</span>装饰</button>
+        <button id="fish-button"><span>◉</span>小鱼</button>
+        <button id="sound-button" aria-pressed="false"><span>♬</span>静音</button>
+      </nav>
+    </main>
+    <div class="modal-backdrop" id="modal-backdrop" hidden>
+      <section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal-close" id="modal-close" aria-label="关闭">×</button>
+        <h2 id="modal-title"></h2><div id="modal-content"></div>
+      </section>
+    </div>
+    <script type="module" src="./src/main.js"></script>
+  </body>
+</html>

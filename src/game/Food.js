@@ -1,0 +1,1 @@
+export class Food { constructor(x){ this.x=x;this.y=.03;this.radius=.013;this.age=0;this.dead=false; } update(dt){this.age+=dt;this.y=Math.min(.87,this.y+dt*.105);} draw(ctx,w,h){ctx.save();ctx.shadowColor='#ffe86c';ctx.shadowBlur=8;ctx.fillStyle='#ffe775';ctx.beginPath();ctx.arc(this.x*w,this.y*h,this.radius*w,0,Math.PI*2);ctx.fill();ctx.restore();} }
