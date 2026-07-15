@@ -29,4 +29,14 @@ async function start(){
 }
 
 start();
-if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register(`${import.meta.env.BASE_URL}sw.js`).catch(()=>{}));
+
+async function removeLegacyOfflineCache(){
+  try{
+    const registrations=await navigator.serviceWorker?.getRegistrations?.()||[];
+    await Promise.all(registrations.filter(registration=>new URL(registration.scope).pathname.includes(import.meta.env.BASE_URL)).map(registration=>registration.unregister()));
+    const keys=await caches.keys();
+    await Promise.all(keys.filter(key=>key.startsWith('dream-aquarium-')).map(key=>caches.delete(key)));
+  }catch{}
+}
+
+removeLegacyOfflineCache();
